@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Lab 10 || API Calls Lab</title>
+    <link rel="stylesheet" href="style.css" />
+  </head>
+  <body>
+    <div class="container">
+      <h1>API Calls Demonstration</h1>
+
+      <div class="button-group">
+        <button id="fetchBtn">Fetch Data with fetch()</button>
+        <button id="xhrBtn">Fetch Data with XHR</button>
+      </div>
+
+      <div class="data-display" id="dataDisplay">
+        <h2>Fetched Data Will Appear Here</h2>
+      </div>
+
+      <div class="form-container">
+        <h2>Send Data to API</h2>
+        <form id="dataForm">
+          <div class="form-group">
+            <label for="userId">User ID (for PUT):</label>
+            <input type="text" id="userId" name="userId" />
+          </div>
+          <div class="form-group">
+            <label for="title">Title:</label>
+            <input type="text" id="title" name="title" required />
+          </div>
+          <div class="form-group">
+            <label for="body">Body:</label>
+            <textarea id="body" name="body" required></textarea>
+          </div>
+          <div class="button-group">
+            <button type="button" id="postBtn">POST Data</button>
+            <button type="button" id="putBtn">PUT Data</button>
+          </div>
+        </form>
+      </div>
+    </div>
+
+    <script src="script.js"></script>
+  </body>
+</html>
