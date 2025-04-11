@@ -1,1 +1,5 @@
-# Lab10_API_Calls
+# Lab10 API Calls
+
+### Completed step
+
+- Setup
