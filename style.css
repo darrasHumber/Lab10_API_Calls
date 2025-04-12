@@ -269,6 +269,9 @@ pre {
   font-family: "Courier New", Courier, monospace;
   margin-top: 15px;
   font-size: 14px;
+  border: 1px solid #e9ecef;
+  max-height: 300px;
+  overflow-y: auto;
 }
 
 /* Responsive Design */

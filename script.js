@@ -16,9 +16,18 @@ const dataForm = document.getElementById("dataForm");
 fetchBtn.addEventListener("click", fetchDataWithFetch);
 xhrBtn.addEventListener("click", fetchDataWithXHR);
 fetchAllBtn.addEventListener("click", fetchAllPosts);
-postBtn.addEventListener("click", postData);
-putBtn.addEventListener("click", putData);
-deleteBtn.addEventListener("click", deletePost);
+postBtn.addEventListener("click", (e) => {
+  e.preventDefault();
+  postData();
+});
+putBtn.addEventListener("click", (e) => {
+  e.preventDefault();
+  putData();
+});
+deleteBtn.addEventListener("click", (e) => {
+  e.preventDefault();
+  deletePost();
+});
 
 // Task 1: API Interaction Using GET Requests
 function fetchDataWithFetch() {
@@ -126,7 +135,6 @@ function putData() {
   const formData = getFormData();
   const postId = document.getElementById("postId").value;
 
-  // Validate input
   if (!postId) {
     showError(responseResults, "Validation Error", {
       message: "Post ID is required for PUT request",
@@ -143,32 +151,40 @@ function putData() {
 
   showLoading(responseResults, `Sending PUT request for post #${postId}...`);
 
-  fetch(`${API_URL}/${postId}`, {
-    method: "PUT",
-    body: JSON.stringify(formData),
-    headers: {
-      "Content-type": "application/json; charset=UTF-8",
-    },
-  })
-    .then(handleResponse)
-    .then((data) => {
+  const xhr = new XMLHttpRequest();
+  xhr.open("PUT", `${API_URL}/${postId}`, true);
+  xhr.setRequestHeader("Content-type", "application/json; charset=UTF-8");
+
+  xhr.onload = function () {
+    if (xhr.status >= 200 && xhr.status < 300) {
+      const data = JSON.parse(xhr.responseText);
       showSuccess(
         responseResults,
         "PUT Successful (200 OK)",
         `
-          <div class="single-item">
-              <strong>${data.title || "No title"}</strong>
-              <p>${data.body || "No content"}</p>
-              <small>ID: ${data.id}, User ID: ${data.userId}</small>
-          </div>
-          <h4>Full Response:</h4>
-          <pre>${JSON.stringify(data, null, 2)}</pre>
-      `
+              <div class="single-item">
+                  <strong>${data.title || "No title"}</strong>
+                  <p>${data.body || "No content"}</p>
+                  <small>ID: ${data.id}, User ID: ${data.userId}</small>
+              </div>
+              <h4>Complete JSON Response:</h4>
+              <pre>${JSON.stringify(data, null, 2)}</pre>
+          `
       );
-    })
-    .catch((error) => {
-      showError(responseResults, "PUT Error", error);
+    } else {
+      showError(responseResults, "PUT Error", {
+        message: `HTTP ${xhr.status}: ${xhr.statusText}`,
+      });
+    }
+  };
+
+  xhr.onerror = function () {
+    showError(responseResults, "Network Error", {
+      message: "Failed to make XHR request",
     });
+  };
+
+  xhr.send(JSON.stringify(formData));
 }
 
 //Part 3: Challange, DELETE post
