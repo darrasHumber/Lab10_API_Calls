@@ -80,3 +80,36 @@ textarea {
   height: 100px;
   resize: vertical;
 }
+
+.response-results {
+  margin-top: 20px;
+  padding: 15px;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+  background-color: #f0f8ff;
+}
+
+.response-results h3 {
+  margin-top: 0;
+  color: #2c3e50;
+}
+
+.single-item {
+  padding: 10px;
+  margin-bottom: 10px;
+  border: 1px solid #eee;
+  border-radius: 4px;
+  background-color: white;
+}
+
+.error {
+  color: #e74c3c;
+  font-weight: bold;
+}
+
+pre {
+  background-color: #f8f8f8;
+  padding: 10px;
+  border-radius: 4px;
+  overflow-x: auto;
+}

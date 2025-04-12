@@ -4,10 +4,14 @@ const API_URL = "https://jsonplaceholder.typicode.com/posts/";
 const fetchBtn = document.getElementById("fetchBtn");
 const xhrBtn = document.getElementById("xhrBtn");
 const dataDisplay = document.getElementById("dataDisplay");
+const postBtn = document.getElementById("postBtn");
+const responseResults = document.getElementById("responseResults");
+const dataForm = document.getElementById("dataForm");
 
 // Event Listeners
 fetchBtn.addEventListener("click", fetchDataWithFetch);
 xhrBtn.addEventListener("click", fetchDataWithXHR);
+postBtn.addEventListener("click", postData);
 
 //Task 1: Task 1: API Interaction Using GET Requests
 function fetchDataWithFetch() {
@@ -50,6 +54,44 @@ function fetchDataWithXHR() {
   };
 
   xhr.send();
+}
+
+// Task 3: Send Data Using POST
+function postData() {
+  const formData = getFormData();
+  responseResults.innerHTML = "<p>Sending POST request...</p>";
+
+  fetch(API_URL, {
+    method: "POST",
+    body: JSON.stringify(formData),
+    headers: {
+      "Content-type": "application/json; charset=UTF-8",
+    },
+  })
+    .then((response) => response.json())
+    .then((data) => {
+      responseResults.innerHTML = `
+          <h3>POST Response (Status: 201 Created)</h3>
+          <div class="single-item">
+              <strong>${data.title || "No title"}</strong>
+              <p>${data.body || "No content"}</p>
+              <small>ID: ${data.id}, User ID: ${data.userId}</small>
+          </div>
+          <h4>Full Response:</h4>
+          <pre>${JSON.stringify(data, null, 2)}</pre>
+      `;
+    })
+    .catch((error) => {
+      responseResults.innerHTML = `<p class="error">POST Error: ${error.message}</p>`;
+    });
+}
+
+function getFormData() {
+  return {
+    title: document.getElementById("title").value,
+    body: document.getElementById("body").value,
+    userId: 1, // Default user ID
+  };
 }
 
 function displayData(data, msg = "") {
