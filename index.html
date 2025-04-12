@@ -3,43 +3,99 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Lab 10 || API Calls Lab</title>
+    <title>Advanced API Calls Lab</title>
     <link rel="stylesheet" href="style.css" />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css"
+    />
   </head>
   <body>
     <div class="container">
-      <h1>API Calls Demonstration</h1>
+      <header>
+        <h1><i class="fas fa-cloud"></i> API Calls Lab</h1>
+        <p>Experiment with different API request methods</p>
+      </header>
 
-      <div class="button-group">
-        <button id="fetchBtn">Fetch Data with fetch()</button>
-        <button id="xhrBtn">Fetch Data with XHR</button>
-      </div>
+      <section class="fetch-section">
+        <h2><i class="fas fa-download"></i> Fetch Data</h2>
+        <div class="button-group">
+          <button id="fetchBtn" class="btn btn-primary">
+            <i class="fas fa-code"></i> Fetch Data with fetch()
+          </button>
+          <button id="xhrBtn" class="btn btn-secondary">
+            <i class="fas fa-exchange-alt"></i> Fetch Data with XHR
+          </button>
+          <button id="fetchAllBtn" class="btn btn-info">
+            <i class="fas fa-list"></i> Fetch First 5 Posts
+          </button>
+        </div>
 
-      <div class="data-display" id="dataDisplay">
-        <h2>Fetched Data Will Appear Here</h2>
-      </div>
+        <div class="data-display" id="dataDisplay">
+          <div class="placeholder">
+            <i class="fas fa-cloud-download-alt"></i>
+            <h3>Fetched Data Will Appear Here</h3>
+          </div>
+        </div>
+      </section>
 
-      <div class="form-container">
-        <h2>Send Data to API</h2>
+      <section class="form-section">
+        <h2><i class="fas fa-paper-plane"></i> Send Data</h2>
         <form id="dataForm">
           <div class="form-group">
-            <label for="title">Title:</label>
-            <input type="text" id="title" name="title" required />
+            <div class="form-group">
+              <label for="postId"
+                ><i class="fas fa-id-card"></i> Post ID (for PUT/DELETE):</label
+              >
+              <input
+                type="text"
+                id="postId"
+                name="postId"
+                placeholder="Enter post ID"
+              />
+            </div>
+            <label for="title"
+              ><i class="fas fa-pen-fancy"></i> Title (for POST/PUT):</label
+            >
+            <input
+              type="text"
+              id="title"
+              name="title"
+              required
+              placeholder="Enter title"
+            />
           </div>
           <div class="form-group">
-            <label for="body">Body:</label>
-            <textarea id="body" name="body" required></textarea>
+            <label for="body"
+              ><i class="fas fa-align-left"></i> Body (for POST/PUT):</label
+            >
+            <textarea
+              id="body"
+              name="body"
+              required
+              placeholder="Enter content"
+            ></textarea>
           </div>
           <div class="button-group">
-            <button type="button" id="postBtn">POST Data</button>
-            <button type="button" id="putBtn">PUT Data</button>
+            <button type="button" id="postBtn" class="btn btn-success">
+              <i class="fas fa-plus"></i> POST Data
+            </button>
+            <button type="button" id="putBtn" class="btn btn-warning">
+              <i class="fas fa-edit"></i> PUT Data
+            </button>
+            <button type="button" id="deleteBtn" class="btn btn-danger">
+              <i class="fas fa-trash"></i> DELETE Post
+            </button>
           </div>
         </form>
-      </div>
-      <div class="response-results" id="responseResults">
-        <h3>API Responses:</h3>
-        <p>POST and PUT responses will appear here</p>
-      </div>
+
+        <div class="response-results" id="responseResults">
+          <div class="placeholder">
+            <i class="fas fa-reply"></i>
+            <h3>API Responses Will Appear Here</h3>
+          </div>
+        </div>
+      </section>
     </div>
 
     <script src="script.js"></script>
