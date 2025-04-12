@@ -5,6 +5,7 @@ const fetchBtn = document.getElementById("fetchBtn");
 const xhrBtn = document.getElementById("xhrBtn");
 const dataDisplay = document.getElementById("dataDisplay");
 const postBtn = document.getElementById("postBtn");
+const putBtn = document.getElementById("putBtn");
 const responseResults = document.getElementById("responseResults");
 const dataForm = document.getElementById("dataForm");
 
@@ -12,6 +13,7 @@ const dataForm = document.getElementById("dataForm");
 fetchBtn.addEventListener("click", fetchDataWithFetch);
 xhrBtn.addEventListener("click", fetchDataWithXHR);
 postBtn.addEventListener("click", postData);
+putBtn.addEventListener("click", putData);
 
 //Task 1: Task 1: API Interaction Using GET Requests
 function fetchDataWithFetch() {
@@ -86,11 +88,42 @@ function postData() {
     });
 }
 
+//Task 4: Update Data Using PUT
+function putData() {
+  const formData = getFormData();
+
+  responseResults.innerHTML = "<p>Sending PUT request...</p>";
+
+  fetch(`${API_URL}/1`, {
+    method: "PUT",
+    body: JSON.stringify(formData),
+    headers: {
+      "Content-type": "application/json; charset=UTF-8",
+    },
+  })
+    .then((response) => response.json())
+    .then((data) => {
+      responseResults.innerHTML = `
+          <h3>PUT Response (Status: 200 OK)</h3>
+          <div class="single-item">
+              <strong>${data.title || "No title"}</strong>
+              <p>${data.body || "No content"}</p>
+              <small>ID: ${data.id}, User ID: ${data.userId}</small>
+          </div>
+          <h4>Full Response:</h4>
+          <pre>${JSON.stringify(data, null, 2)}</pre>
+      `;
+    })
+    .catch((error) => {
+      responseResults.innerHTML = `<p class="error">PUT Error: ${error.message}</p>`;
+    });
+}
+
 function getFormData() {
   return {
     title: document.getElementById("title").value,
     body: document.getElementById("body").value,
-    userId: 1, // Default user ID
+    userId: 1,
   };
 }
 
