@@ -8,3 +8,5 @@
 
 - Task 1: API Interaction Using GET Requests
 - Task 2: API Interaction Using XMLHttpRequest
+- Task 3: Send Data Using POST
+
